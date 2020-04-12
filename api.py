@@ -30,6 +30,13 @@ def prediction_service(periods):
             
     return list
 
+class PredictionSaludo(Resource):
+    def get(self):
+        return "Congratulations!! Welcome to prediction API!!"
+
+api.add_resource(PredictionSaludo, '/servicio/v1/prediccion/saludo')
+
+
 class Prediction24(Resource):
     def get(self):
         json = prediction_service(24)
@@ -52,4 +59,4 @@ class Prediction72(Resource):
 api.add_resource(Prediction72, '/servicio/v1/prediccion/72horas/')
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, host='0.0.0.0')

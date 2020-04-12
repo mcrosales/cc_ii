@@ -10,7 +10,6 @@ MarkupSafe==1.1.1
 numpy==1.18.2
 pandas==1.0.3
 patsy==0.5.1
-pkg-resources==0.0.0
 pmdarima==1.5.3
 PyMySQL==0.9.3
 python-dateutil==2.8.1
