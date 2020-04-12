@@ -1,0 +1,34 @@
+version: '2'
+services:
+  weather_db:
+    build: ./mariadb_container
+    image: weather_prediction_db:1.0
+    container_name: weather_prediction_db
+    hostname: weather_prediction_db
+    restart: always
+    networks:
+      - prediction_network      
+    environment:
+      MYSQL_ROOT_PASSWORD: admin
+      MYSQL_DATABASE: admin
+    expose:
+      - 3306
+    ports:
+      - 3306:3306
+  prediction_flask:
+    build: ./flask-api
+    image: prediction_service_flask:1.0
+    container_name: prediction_service_flask
+    hostname: prediction_service_flask
+    restart: always
+    networks:
+      - prediction_network
+    depends_on:
+      - weather_db
+    expose:
+      - 5000
+    ports:
+      - 5000:5000
+    command: ['python', 'api.py']
+networks:
+    prediction_network:
