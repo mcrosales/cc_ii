@@ -7,7 +7,7 @@ import pymysql
 def predict_temperature(periods):
 
     # Open database connection
-    db = pymysql.connect("localhost","root","admin","admin" )
+    db = pymysql.connect("weather_prediction_db","root","admin","admin" )
 
     # prepare a cursor object using cursor() method
     cursor = db.cursor()
