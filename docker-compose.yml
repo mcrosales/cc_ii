@@ -1,7 +1,6 @@
 version: '2'
 services:
   weather_db:
-    build: ./prediction_flask/mariadb_container
     image: weather_prediction_db:1.0
     container_name: weather_prediction_db
     hostname: weather_prediction_db
@@ -15,8 +14,10 @@ services:
       - 3306
     ports:
       - 3306:3306
+    volumes: 
+      - /tmp/workflow/data/:/var/lib/mysql
   prediction_flask:
-    build: ./prediction_flask
+    build: ./flask-api
     image: prediction_service_flask:1.0
     container_name: prediction_service_flask
     hostname: prediction_service_flask
