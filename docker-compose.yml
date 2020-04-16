@@ -1,5 +1,6 @@
 version: '2'
 services:
+
   weather_db:
     image: weather_prediction_db:1.0
     container_name: weather_prediction_db
@@ -16,6 +17,7 @@ services:
       - 3306:3306
     volumes: 
       - /tmp/workflow/data/:/var/lib/mysql
+
   prediction_flask:
     build: ./flask-api
     image: prediction_service_flask:1.0
@@ -31,5 +33,18 @@ services:
     ports:
       - 5000:5000
     command: ['python', 'api.py']
+    
+  prediction_spring:
+      build: ./spring-api
+      image: prediction_service_spring:1.0
+      container_name: prediction_service_spring
+      hostname: prediction_service_spring
+      restart: always
+      networks:
+        - prediction_network
+      expose:
+        - 8081
+      ports:
+        - 8081:8081
 networks:
     prediction_network:
